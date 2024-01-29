@@ -5,11 +5,13 @@ const ImageGenerator=() => {
 
     const [image_url,setImage_url] = useState("/");
     let inputRef = useRef(null);
+    const [loading,setLoading] = useState(false);
     
     const ImageGenerator = async() =>{
         if(inputRef.current.value === ""){
             return 0;
         }
+        setLoading(true);
         const response = await fetch(
             "https://api.openai.com/v1/images/generations",
             {
@@ -28,27 +30,37 @@ const ImageGenerator=() => {
             }
         );
         let data = await response.json();
-        console.log(data);
+        let data_array = data.data;
+        setImage_url(data_array[0].url);
+        setLoading(false);
     }
 
     return(     
-    <div className="parent">
-        <section class="main-layout d-flex justify-content-center align-items-center bg-img">
-            <div class="container">
+    <div classNameName="parent">
+        <section className="main-layout d-flex justify-content-center align-items-center bg-img">
+            <div className="container">
                 {/* title  */}
-                <h1 class="text-center text-light">AI Image <span class="text-primary">Generator</span></h1>
+                <h1 className="text-center text-light">AI Image <span className="text-primary">Generator</span></h1>
 
                 {/* main image area */}
-                <div class="d-flex justify-content-center align-items-center hero-img">
-                    <img class="generative-img" src={image_url==="/"?Robot_img:image_url} height="250px" width="250px" alt="Generative Image" />
+                <div className="d-flex justify-content-center align-items-center hero-img">
+                    <img className="generative-img" src={image_url==="/"?Robot_img:image_url} height="250px" width="250px" alt="Generative Image" />
                 </div>
 
-                {/* search bar  */}
-                <div class="input-group d-flex justify-content-center">
-                    <div class="form-outline" data-mdb-input-init>
-                    <input id="search-focus" ref={inputRef} type="search" placeholder="Describe What You Want To See" class="form-control transparent-input" />
+                {/*  loading frame */}
+                <div className="loading">
+                    <div className={loading?"loading-bar-full":"loading-bar"}>
+                        <div className={loading?"loading-text":"display-none"}>Loading...</div>
                     </div>
-                    <button type="button" onClick={()=>{ImageGenerator()}} class="btn btn-primary" data-mdb-ripple-init>
+                </div>
+
+
+                {/* search bar  */}
+                <div className="input-group d-flex justify-content-center">
+                    <div className="form-outline" data-mdb-input-init>
+                    <input id="search-focus" ref={inputRef} type="search" placeholder="Describe What You Want To See" className="form-control transparent-input" />
+                    </div>
+                    <button type="button" onClick={()=>{ImageGenerator()}} className="btn btn-primary" data-mdb-ripple-init>
                         Generate
                     </button>
                 </div>
