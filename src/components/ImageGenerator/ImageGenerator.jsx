@@ -1,14 +1,23 @@
 import React, { useRef,useState } from "react";
 import Robot_img from '../Assets/AI_Robot.jpg';
+ 
 
 const ImageGenerator=() => {
+
+    // useState to store input value
+    const [inputValue, setInputValue] = useState('');
+
+    // Handle input change & update state
+    const handleInputChange = (event) =>{
+        setInputValue(event.target.value);
+    };
 
     const [image_url,setImage_url] = useState("/");
     let inputRef = useRef(null);
     const [loading,setLoading] = useState(false);
     
     const ImageGenerator = async() =>{
-        if(inputRef.current.value === ""){
+        if(inputRef.current.value===""){
             return 0;
         }
         setLoading(true);
@@ -41,6 +50,7 @@ const ImageGenerator=() => {
             <div className="container">
                 {/* title  */}
                 <h1 className="text-center text-light">AI Image <span className="text-primary">Generator</span></h1>
+                <p className="text-white">Input Value :  {inputValue}</p>
 
                 {/* main image area */}
                 <div className="d-flex justify-content-center align-items-center hero-img">
@@ -55,10 +65,10 @@ const ImageGenerator=() => {
                 </div>
 
 
-                {/* search bar  */}
+                {/* Input Bar  */}
                 <div className="input-group d-flex justify-content-center">
                     <div className="form-outline" data-mdb-input-init>
-                    <input id="search-focus" ref={inputRef} type="search" placeholder="Describe What You Want To See" className="form-control transparent-input" />
+                    <input id="search-focus" ref={inputRef} type="text" value={inputValue} onChange={handleInputChange} placeholder="Describe What You Want To See" className="form-control transparent-input" />
                     </div>
                     <button type="button" onClick={()=>{ImageGenerator()}} className="btn btn-primary" data-mdb-ripple-init>
                         Generate
