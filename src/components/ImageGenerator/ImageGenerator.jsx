@@ -32,9 +32,9 @@ const ImageGenerator=() => {
                     "User-Agent":"Chrome",
                 },
                 body:JSON.stringify({
-                    prompt:'${inputRef.current.value}',
+                    prompt:`${inputRef.current.value}`,
                     n:1,
-                    size:"512x512",
+                    size:"1024x1024",
                 }),
             }
         );
@@ -50,11 +50,11 @@ const ImageGenerator=() => {
             <div className="container">
                 {/* title  */}
                 <h1 className="text-center text-light">AI Image <span className="text-primary">Generator</span></h1>
-                <p className="text-white">Input Value :  {inputValue}</p>
+                {/* <p className="text-white">Input Value :  {inputValue}</p> */}
 
                 {/* main image area */}
                 <div className="d-flex justify-content-center align-items-center hero-img">
-                    <img className="generative-img" src={image_url==="/"?Robot_img:image_url} height="250px" width="250px" alt="Generative Image" />
+                    <img className="generative-img" src={image_url==="/"?Robot_img:image_url} height="300px" width="300px" alt="Generative" />
                 </div>
 
                 {/*  loading frame */}
