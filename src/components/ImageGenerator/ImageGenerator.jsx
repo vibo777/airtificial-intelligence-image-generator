@@ -34,7 +34,7 @@ const ImageGenerator=() => {
                 body:JSON.stringify({
                     prompt:`${inputRef.current.value}`,
                     n:1,
-                    size:"1024x1024",
+                    size:"512x512",
                 }),
             }
         );
@@ -53,17 +53,15 @@ const ImageGenerator=() => {
                 {/* <p className="text-white">Input Value :  {inputValue}</p> */}
 
                 {/* main image area */}
-                <div className="d-flex justify-content-center align-items-center hero-img">
+                <div className="hero-img">
                     <img className="generative-img" src={image_url==="/"?Robot_img:image_url} height="300px" width="300px" alt="Generative" />
-                </div>
-
-                {/*  loading frame */}
-                <div className="loading">
-                    <div className={loading?"loading-bar-full":"loading-bar"}>
-                        <div className={loading?"loading-text":"display-none"}>Loading...</div>
+                    {/*  loading frame */}
+                    <div className="d-flex justify-content-center loading">
+                        <div className={loading?"loading-bar-full":"loading-bar"}>
+                            <div className={loading?"loading-text":"display-none"}>Loading...</div>
+                        </div>
                     </div>
                 </div>
-
 
                 {/* Input Bar  */}
                 <div className="input-group d-flex justify-content-center">
