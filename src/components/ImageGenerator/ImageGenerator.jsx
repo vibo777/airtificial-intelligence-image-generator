@@ -40,7 +40,7 @@ const ImageGenerator=() => {
         );
         let data = await response.json();
         let data_array = data.data;
-        setImage_url(data_array[0].url);
+        setImage_url(data_array[1].url);
         setLoading(false);
     }
 
